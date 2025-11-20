@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM MESSAGE</title>
+    <style>
+        /* RESET DASAR */
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Hitam Pekat */
+            color: #0f0; /* Hijau Hacker */
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* --- TOMBOL PEMBUKA --- */
+        #overlay-btn {
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
+            background: black; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 2147483647;
+            cursor: pointer;
+        }
+
+        #tombol-mulai {
+            padding: 25px 60px; 
+            font-size: 22px; 
+            letter-spacing: 4px;
+            background-color: black !important; 
+            color: #0f0 !important; 
+            border: 3px solid #0f0 !important; 
+            cursor: pointer;
+            font-weight: bold; 
+            text-transform: uppercase;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            font-family: 'Courier New', Courier, monospace;
+            outline: none;
+        }
+
+        #tombol-mulai:hover {
+            background-color: #0f0 !important; 
+            color: black !important; 
+            box-shadow: 0 0 80px rgba(0, 255, 0, 1); 
+            transform: scale(1.05);
+        }
+
+        /* --- KONTEN UTAMA (POLOS TANPA FRAME) --- */
+        #main-content {
+            display: none; /* Sembunyi dulu */
+            width: 90%;
+            max-width: 800px;
+            padding: 20px; /* Padding dikit biar gak mepet layar HP */
+            
+            /* HAPUS FRAME DI SINI */
+            border: none; 
+            box-shadow: none;
+            background: transparent;
+            
+            text-align: left; /* Rata Kiri */
+            position: relative;
+            z-index: 1;
+        }
+        
+        #konten-surat {
+            font-size: 1.1rem; 
+            line-height: 2; 
+            white-space: pre-wrap; 
+            font-weight: bold;
+            color: #0f0;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.7); /* Glow teks tetep ada biar kebaca */
+        }
+
+        .cursor {
+            display: inline-block; 
+            width: 10px; height: 22px; 
+            background-color: #0f0; 
+            animation: kedip 0.8s infinite;
+            margin-left: 5px;
+            vertical-align: bottom;
+        }
+
+        @keyframes kedip { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+
+        /* Responsive HP */
+        @media (max-width: 600px) {
+            #konten-surat { font-size: 1rem; line-height: 1.6; }
+            #tombol-mulai { padding: 20px 30px; font-size: 18px; border: 2px solid #0f0; }
+        }
+        
+        audio { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay-btn">
+        <button id="tombol-mulai" onclick="mulaiShow()">[ OPEN MESSAGE ]</button>
+    </div>
+
+    <div id="main-content">
+        <div id="konten-surat">
+            <span id="teks-jalan"></span><span class="cursor"></span>
+        </div>
+    </div>
+
+    <audio id="musik" loop>
+        <source src="falling.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const pesan = `
+Hai... 
+Apa kabar?
+
+Sudah 5 tahun aku tidak,
+mendengar kabarmu lagi.
+
+Gimana hari-harinya? 
+Semoga lancar terus ya.
+Mungkin sekarang kamu sudah ada yang baru. 
+
+Jujur, kadang masih kangen ketawa bareng.
+Dan aku pun masih terbayang-bayang oleh senyumanmu.
+
+Tapi aku senang jika kamu sudah bahagia.
+Walaupun dengan yang lain...
+
+Tapi yaudah, life must go on kan?
+
+Sukses terus buat kamu.
+Bahagia selalu ya...
+CHATERINA.
+        `;
+
+        let i = 0;
+        const speed = 175; 
+        
+        function mulaiShow() {
+            // 1. HAPUS TOMBOL
+            var btn = document.getElementById("overlay-btn");
+            if(btn) btn.remove(); 
+
+            // 2. MUNCULKAN KONTEN
+            var content = document.getElementById("main-content");
+            content.style.display = "block";
+
+            // 3. PLAY AUDIO
+            var audio = document.getElementById("musik");
+            if(audio) {
+                audio.play().catch(function(error) {
+                    console.log("Audio error: " + error);
+                });
+            }
+
+            // 4. MULAI NGETIK (Delay 2 detik)
+            setTimeout(ketik, 2000);
+        }
+
+        function ketik() {
+            if (i < pesan.length) {
+                document.getElementById("teks-jalan").innerHTML += pesan.charAt(i);
+                i++;
+                setTimeout(ketik, speed);
+            }
+        }
+    </script>
+</body>
+</html>
