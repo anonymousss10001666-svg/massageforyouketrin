@@ -119,45 +119,52 @@
         <source src="falling.mp3" type="audio/mpeg">
     </audio>
 
-    <script>
+   <script>
         const pesan = `
-Hai... 
+Hai, Ketrin...
 Apa kabar?
 
-Sudah 5 tahun aku tidak,
-mendengar kabarmu lagi.
+Gak kerasa ya,
+sebentar lagi sudah mau 2026.
 
-Gimana hari-harinya? 
-Semoga lancar terus ya.
- 
-kamu masih inget sama aku gak?
-gpp deh kalo kamu udah lupa sama aku.
-tapi walaupun kamu lupa, aku gak bakal lupa sama kamu.
-Jujur, kadang masih kangen ketawa bareng.
-Dan aku pun masih terbayang-bayang oleh senyumanmu.
-wajah mu masih sering muncul di mimpiku...
+Tapi dalam lima tahun ini,
+aku masih menunggumu.
+Aku kira waktu bakal menyembuhkan,
+ternyata cuma memaksaku terbiasa tanpamu.
 
-Tapi aku senang jika kamu sudah bahagia.
-Walaupun dengan yang lain...
+Wajahmu, senyummu, tawamu...
+masih membekas dalam pikiranku.
+Jujur, aku masih sering berharap kita bisa kembali.
+Rasa itu masih ada, gak berkurang sedikitpun.
 
-Sukses terus buat kamu.
-Bahagia selalu ya...
-CHATERINA.
+Tapi aku sadar...
+Kadang cinta itu bukan tentang memiliki,
+tapi tentang merelakan orang yang kita sayang bahagia.
+Walaupun bahagianya bukan sama aku.
+
+Sakit sih rasanya...
+Harus nyerah pas lagi sayang-sayangnya.
+Tapi aku gak boleh egois.
+Aku terpaksa lepasin kamu, demi kebaikanmu.
+
+Pesanku, jaga dirimu baik-baik ya.
+Terima kasih buat semuanya.
+Bahagia selalu ya.
+
+Dari aku,
+Yang terpaksa mundur.
         `;
 
         let i = 0;
-        const speed = 145; 
+        const speed = 110; 
         
         function mulaiShow() {
-            // 1. HAPUS TOMBOL
             var btn = document.getElementById("overlay-btn");
             if(btn) btn.remove(); 
 
-            // 2. MUNCULKAN KONTEN
             var content = document.getElementById("main-content");
             content.style.display = "block";
 
-            // 3. PLAY AUDIO
             var audio = document.getElementById("musik");
             if(audio) {
                 audio.play().catch(function(error) {
@@ -165,7 +172,6 @@ CHATERINA.
                 });
             }
 
-            // 4. MULAI NGETIK (Delay 2 detik)
             setTimeout(ketik, 2000);
         }
 
@@ -177,9 +183,7 @@ CHATERINA.
             }
         }
     </script>
-</body>
 
-</html>
 
 
 
