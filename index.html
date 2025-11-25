@@ -14,15 +14,19 @@
             background-color: #000; /* Hitam Pekat */
             color: #0f0; /* Hijau Hacker */
             font-family: 'Courier New', Courier, monospace;
-            height: 100vh;
-            width: 100vw;
+            
+            /* --- PERBAIKAN SCROLL --- */
+            min-height: 100vh; /* Minimal setinggi layar, tapi bisa manjang ke bawah */
+            width: 100%;
             display: flex;
+            flex-direction: column; /* Biar scroll aman */
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow-y: auto; /* IZINKAN SCROLL */
+            overflow-x: hidden; /* Cegah scroll samping */
         }
 
-        /* --- TOMBOL PEMBUKA --- */
+        /* --- TOMBOL PEMBUKA (LAYER DEWA) --- */
         #overlay-btn {
             position: fixed; 
             top: 0; left: 0; 
@@ -57,19 +61,20 @@
             transform: scale(1.05);
         }
 
-        /* --- KONTEN UTAMA (POLOS TANPA FRAME) --- */
+        /* --- KONTEN UTAMA --- */
         #main-content {
             display: none; /* Sembunyi dulu */
             width: 90%;
             max-width: 800px;
-            padding: 20px; /* Padding dikit biar gak mepet layar HP */
+            /* Margin Auto biar aman pas discroll */
+            margin: 50px auto; 
             
-            /* HAPUS FRAME DI SINI */
+            /* Polosan tanpa border */
             border: none; 
             box-shadow: none;
             background: transparent;
             
-            text-align: left; /* Rata Kiri */
+            text-align: left; 
             position: relative;
             z-index: 1;
         }
@@ -80,7 +85,8 @@
             white-space: pre-wrap; 
             font-weight: bold;
             color: #0f0;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.7); /* Glow teks tetep ada biar kebaca */
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.7); 
+            padding-bottom: 50px; /* Tambahan ruang di bawah biar gak mepet */
         }
 
         .cursor {
@@ -98,6 +104,7 @@
         @media (max-width: 600px) {
             #konten-surat { font-size: 1rem; line-height: 1.6; }
             #tombol-mulai { padding: 20px 30px; font-size: 18px; border: 2px solid #0f0; }
+            #main-content { margin: 20px auto; }
         }
         
         audio { display: none; }
@@ -119,10 +126,11 @@
         <source src="falling.mp3" type="audio/mpeg">
     </audio>
 
-   <script>
+    <script>
         const pesan = `
 Hai, Ketrin...
 Apa kabar?
+Gimana keadaanya, sehat? 
 
 Gak kerasa ya,
 sebentar lagi sudah mau 2026.
@@ -156,6 +164,8 @@ Yang terpaksa mundur.
         `;
 
         let i = 0;
+        
+        // Speed ngetik (110 udah pas buat teks sepanjang ini)
         const speed = 110; 
         
         function mulaiShow() {
@@ -179,15 +189,11 @@ Yang terpaksa mundur.
             if (i < pesan.length) {
                 document.getElementById("teks-jalan").innerHTML += pesan.charAt(i);
                 i++;
+                // Auto scroll ke bawah ngikutin ketikan
+                window.scrollTo(0, document.body.scrollHeight);
                 setTimeout(ketik, speed);
             }
         }
     </script>
-
-
-
-
-
-
-
-
+</body>
+</html>
